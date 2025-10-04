@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane xmlns:fx="http://javafx.com/fxml"
+         fx:controller="com.seboot.portpocket.controller.PortfolioController"
+         stylesheets="@css/style.css">
+
+    <tabs>
+        <!-- TAB 1: PORTFOLIO -->
+        <Tab text="Portfolio" closable="false">
+            <BorderPane>
+                <top>
+                    <Label text="My Portfolio" styleClass="title-label"/>
+                </top>
+                <center>
+                    <TableView fx:id="activeTable" prefHeight="400" prefWidth="600">
+                        <columns>
+                            <TableColumn fx:id="colName" text="Name" prefWidth="120"/>
+                            <TableColumn fx:id="colType" text="Type" prefWidth="100"/>
+                            <TableColumn fx:id="colPrice" text="Price" prefWidth="120"/>
+                            <TableColumn fx:id="colQuantity" text="Quantity" prefWidth="100"/>
+                            <TableColumn fx:id="colValue" text="Total value" prefWidth="140"/>
+                        </columns>
+                    </TableView>
+                </center>
+                <bottom>
+                    <HBox spacing="15" alignment="CENTER" style="-fx-padding: 10; -fx-background-color: #f5f5f5;">
+                        <Button text="➕ Add Active" onAction="#openForm"
+                                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                        <Button text="🗑 Delete Active" onAction="#deleteSelected"
+                                style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label text="Total Invested:" style="-fx-font-weight: bold;"/>
+                        <Label fx:id="lblTotal" text="0.0" style="-fx-text-fill: green; -fx-font-size: 14px;"/>
+                    </HBox>
+                </bottom>
+            </BorderPane>
+        </Tab>
+
+        <!-- TAB 2: CHARTS -->
+        <Tab text="Charts" closable="false">
+            <VBox spacing="20" alignment="CENTER" style="-fx-padding: 20;">
+                <PieChart fx:id="diversificationChart" title="Diversification"/>
+
+                <LineChart fx:id="evolutionChart" title="Evolution Over Time">
+                    <xAxis>
+                        <CategoryAxis label="Date"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Value"/>
+                    </yAxis>
+                </LineChart>
+            </VBox>
+        </Tab>
+    </tabs>
+</TabPane>
+
+

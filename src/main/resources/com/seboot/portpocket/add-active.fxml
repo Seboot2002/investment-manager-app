@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.shape.Rectangle?>
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.seboot.portpocket.controller.ActiveController"
+           stylesheets="@css/style.css">
+
+    <Rectangle width="400" height="300" fill="#f0f2f5" arcWidth="20" arcHeight="20"/>
+
+    <VBox spacing="15" alignment="CENTER" maxWidth="350" styleClass="card">
+        <Label text="Add New Active" styleClass="title-label"/>
+
+        <HBox spacing="10">
+            <TextField fx:id="txtName" promptText="Active name"
+                       styleClass="input-field" HBox.hgrow="ALWAYS"/>
+            <ComboBox fx:id="cmbType" promptText="Select type"
+                      styleClass="input-field" HBox.hgrow="ALWAYS"/>
+        </HBox>
+        <TextField fx:id="txtPrice" promptText="Purchase price" styleClass="input-field"/>
+        <TextField fx:id="txtQuantity" promptText="Quantity" styleClass="input-field"/>
+
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <Button text="Cancel" onAction="#closeForm" styleClass="secondary-button"/>
+            <Button text="Save" onAction="#saveActive" styleClass="primary-button"/>
+        </HBox>
+    </VBox>
+</StackPane>
+
+

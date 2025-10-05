@@ -5,13 +5,23 @@ import com.seboot.portpocket.model.Active;
 import com.seboot.portpocket.model.ActiveType;
 import com.seboot.portpocket.model.Portfolio;
 
+import java.time.LocalDate;
+
 public class PortfolioService {
 
+    private static PortfolioService instance;
     private final Portfolio portfolio = new Portfolio();
     private final ActiveDao dao = new ActiveDao();
 
     public PortfolioService() {
         portfolio.getAllActives().addAll(dao.getAll());
+    }
+
+    public static synchronized PortfolioService getInstance() {
+        if (instance == null) {
+            instance = new PortfolioService();
+        }
+        return instance;
     }
 
     public void addActive(

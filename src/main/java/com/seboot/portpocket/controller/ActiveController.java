@@ -7,6 +7,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+
 public class ActiveController {
 
     @FXML private TextField txtName;
@@ -37,7 +39,7 @@ public class ActiveController {
             int quantity = Integer.parseInt(txtQuantity.getText());
 
             Active active = new Active(
-                name, type, price, price, quantity
+                name, type, price, price, quantity, LocalDate.now()
             );
 
             System.out.println(active);

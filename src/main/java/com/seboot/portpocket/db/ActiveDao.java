@@ -4,11 +4,12 @@ import com.seboot.portpocket.model.Active;
 import com.seboot.portpocket.model.ActiveType;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ActiveDao {
-    String sql = "INSERT INTO active(name, type, price, quantity) VALUES(?, ?, ?, ?)";
+    String sql = "INSERT INTO active(name, type, price, quantity, date) VALUES(?, ?, ?, ?, ?)";
 
     public void insert(Active active) {
         try (Connection conn = Database.getConnection();
@@ -18,6 +19,7 @@ public class ActiveDao {
             pstmt.setString(2, active.type().name());
             pstmt.setDouble(3, active.currentPrice());
             pstmt.setInt(4, active.quantity());
+            pstmt.setString(5, active.purchaseDate().toString());
 
             pstmt.executeUpdate();
 
@@ -54,7 +56,8 @@ public class ActiveDao {
                         ActiveType.valueOf(rs.getString("type")),
                         rs.getDouble("price"),
                         rs.getDouble("price"),
-                        rs.getInt("quantity")
+                        rs.getInt("quantity"),
+                        LocalDate.parse(rs.getString("date"))
                 );
                 list.add(active);
             }

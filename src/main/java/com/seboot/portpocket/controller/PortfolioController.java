@@ -23,21 +23,16 @@ import javafx.stage.Stage;
 
 public class PortfolioController {
 
+    private final PortfolioService service = PortfolioService.getInstance();
+    private Stage stage;
+
     @FXML private TableView<Active> activeTable;
     @FXML private TableColumn<Active, String> colName;
     @FXML private TableColumn<Active, ActiveType> colType;
     @FXML private TableColumn<Active, Double> colPrice;
     @FXML private TableColumn<Active, Integer> colQuantity;
     @FXML private TableColumn<Active, Double> colValue;
-
     @FXML private Label lblTotal;
-
-    @FXML private PieChart diversificationChart;
-    @FXML private LineChart<String, Number> evolutionChart;
-
-    private final PortfolioService service = new PortfolioService();
-
-    private Stage stage;
 
     @FXML
     public void initialize() {
@@ -55,10 +50,6 @@ public class PortfolioController {
         activeTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         activeTable.setItems(service.getPortfolio().getAllActives());
         lblTotal.setText(String.valueOf(service.getPortfolio().getAllInvested()));
-
-        diversificationChart.setData(setDiversificationChartData(service.getPortfolio()));
-
-        evolutionChart.getData().add(setEvolutionChartData());
     }
 
     @FXML
@@ -108,29 +99,6 @@ public class PortfolioController {
         } else {
             System.out.println("No active selected");
         }
-    }
-
-    public ObservableList<PieChart.Data> setDiversificationChartData(Portfolio portfolio) {
-        ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
-
-        portfolio.getDiversification()
-            .forEach((ActiveType type, Double total) -> {
-                pieData.add(new PieChart.Data(type.name(), total));
-            });
-
-        return pieData;
-    }
-
-    public XYChart.Series<String, Number> setEvolutionChartData() {
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.setName("Total Value");
-
-        series.getData().add(new XYChart.Data<>("Day 1", 1000));
-        series.getData().add(new XYChart.Data<>("Day 2", 1200));
-        series.getData().add(new XYChart.Data<>("Day 3", 1100));
-        series.getData().add(new XYChart.Data<>("Day 4", 1400));
-
-        return series;
     }
 
 }

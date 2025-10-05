@@ -27,7 +27,7 @@ tasks.withType<JavaCompile> {
 
 application {
     mainModule.set("com.seboot.portpocket")
-    mainClass.set("com.seboot.portpocket.HelloApplication")
+    mainClass.set("com.seboot.portpocket.MainApplication")
 }
 
 javafx {

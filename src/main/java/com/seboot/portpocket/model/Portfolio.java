@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Portfolio {
@@ -49,16 +46,13 @@ public class Portfolio {
             ));
     }
 
-    private List<String> getMounthsOfCurrentYear() {
-        YearMonth currentMounth = YearMonth.now();
-        List<String> yearMonths = new ArrayList<>();
-
-        for (int month = 1; month <= currentMounth.getMonthValue(); month++) {
-            yearMonths.add(YearMonth.of(currentMounth.getYear(), month)
-                    .format(DateTimeFormatter.ofPattern("MMM", Locale.ENGLISH)));
-        }
-
-        return yearMonths;
+    public Map<String, Double> getEvolutionValueData() {
+        return actives.stream()
+            .collect(Collectors.groupingBy(
+                active -> active.getPurchaseDate().getMonth().name(),
+                TreeMap::new,
+                Collectors.summingDouble(Active::getTotalValue)
+            ));
     }
 
 }

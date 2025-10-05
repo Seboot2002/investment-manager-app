@@ -14,7 +14,8 @@ public class Migration {
                     name TEXT NOT NULL,
                     type TEXT NOT NULL,
                     price REAL NOT NULL,
-                    quantity INTEGER NOT NULL
+                    quantity INTEGER NOT NULL,
+                    date TEXT NOT NULL
                 )
             """);
         } catch (Exception e) {
